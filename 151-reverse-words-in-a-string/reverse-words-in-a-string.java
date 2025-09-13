@@ -1,24 +1,30 @@
 class Solution {
     public String reverseWords(String s) {
-        StringBuilder result = new StringBuilder();
+       List<String> words = new ArrayList<>();
         StringBuilder word = new StringBuilder();
-        int i = s.length() - 1;
-        while (i >= 0) {
-            while (i >= 0 && s.charAt(i) == ' ') {
-                i--;
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+
+            if (c != ' ') {
+                word.append(c);
+            } else {
+                if (word.length() > 0) {
+                    words.add(word.toString());
+                    word.setLength(0);
+                }
             }
-            if (i < 0) break;
-            word.setLength(0);
-            while (i >= 0 && s.charAt(i) != ' ') {
-                word.append(s.charAt(i));
-                i--;
-            }
-            word.reverse();
-            if (result.length() > 0) {
-                result.append(" ");
-            }
-            result.append(word);
         }
-        return result.toString();
+
+        // Add last word if exists
+        if (word.length() > 0) {
+            words.add(word.toString());
+        }
+
+        // Now reverse the words
+        Collections.reverse(words);
+
+        // Join with single space
+        return String.join(" ", words);
     }
 }
