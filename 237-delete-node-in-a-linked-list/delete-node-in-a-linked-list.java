@@ -7,17 +7,11 @@
  * }
  */
 class Solution {
+
     public void deleteNode(ListNode node) {
-        ListNode temp = node;
-        while(temp.next!=null){
-            temp.val = temp.next.val;
-            if(temp.next.next!=null){
-                temp = temp.next;
-            }
-            else{
-                temp.next=null;
-            }
-        }
-        return;
+        // Overwrite data of next node on current node.
+        node.val = node.next.val;
+        // Make current node point to next of next node.
+        node.next = node.next.next;
     }
 }
